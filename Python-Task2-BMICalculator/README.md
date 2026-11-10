@@ -2,7 +2,7 @@
 
 # Advanced BMI Calculator
 
-**Oasis Infobyte Data Python Programming Internship — Task 2**
+**Oasis Infobyte Python Programming Internship — Task 2**
 
 <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" /> <img src="https://img.shields.io/badge/CustomTkinter-4B8BBE?style=for-the-badge" alt="CustomTkinter" /> <img src="https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite" /> <img src="https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge" alt="Matplotlib" />
 
