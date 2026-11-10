@@ -1,0 +1,291 @@
+:root {
+    --bg-color: #121212;
+    --surface-color: #1e1e1e;
+    --border-color: #333;
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --accent: #bb86fc;
+    --accent-hover: #9965f4;
+    --good: #03dac6;
+    --warn: #ffb74d;
+    --bad: #cf6679;
+    --font-sans: system-ui, -apple-system, sans-serif;
+    --font-mono: "Fira Code", "Courier New", monospace;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    margin: 0;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.topbar {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.topbar h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.logo {
+    color: var(--accent);
+}
+
+.tagline {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    width: 100%;
+    max-width: 800px;
+}
+
+.card {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.card h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.badge {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+    background-color: var(--bad);
+    color: #000;
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.badge.unlocked {
+    background-color: var(--good);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Generator Controls */
+.mode-toggle {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.mode-btn {
+    flex: 1;
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mode-btn.active {
+    background-color: var(--border-color);
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+input[type="range"] {
+    width: 60%;
+}
+
+.checks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.checks .wide {
+    grid-column: span 2;
+}
+
+code {
+    font-family: var(--font-mono);
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
+
+/* Outputs & Buttons */
+.output-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+input[type="text"], input[type="password"] {
+    flex: 1;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+}
+
+.btn {
+    background-color: var(--border-color);
+    color: var(--text-primary);
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.btn:hover {
+    background-color: #444;
+}
+
+.btn-accent {
+    background-color: var(--accent);
+    color: #000;
+}
+
+.btn-accent:hover {
+    background-color: var(--accent-hover);
+}
+
+.btn-wide {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* Meter */
+.meter-wrap {
+    margin-bottom: 1.5rem;
+}
+
+.meter {
+    height: 8px;
+    background-color: var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+#meter-fill {
+    height: 100%;
+    width: 0%;
+    background-color: var(--bad);
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.meter-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* Breach Status */
+#breach-result {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.pwned {
+    background-color: rgba(207, 102, 121, 0.2);
+    color: var(--bad);
+    border: 1px solid var(--bad);
+}
+
+.clean {
+    background-color: rgba(3, 218, 198, 0.2);
+    color: var(--good);
+    border: 1px solid var(--good);
+}
+
+/* Vault Styles */
+.entry-form {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+#vault-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#vault-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+}
+
+.svc {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.usr {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.secret {
+    font-family: var(--font-mono);
+    color: var(--good);
+    letter-spacing: 1px;
+}
+
+.hint {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+}
+
+.footer {
+    margin-top: auto;
+    padding-top: 2rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}

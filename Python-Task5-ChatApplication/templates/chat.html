@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oasis Chat — Dashboard</title>
+    <!-- Socket.IO client library loaded via Cloudflare CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Jinja2 injects these values from app.py's /chat route so chat.js
+         knows who we are and which rooms exist. -->
+    <script>
+        // Rendered server-side into JS constants. `| tojson` safely serializes
+        // Python objects into valid JavaScript (handles quoting/escaping).
+        const CURRENT_USER = {{ username | tojson }};
+        const ROOMS        = {{ rooms | tojson }};
+    </script>
+
+    <div class="app-container">
+
+        <!-- ============ SIDEBAR: room selection + user info ============ -->
+        <aside class="sidebar">
+            <h2 class="logo">💬 Oasis Chat</h2>
+
+            <p class="sidebar-section">Rooms</p>
+            <ul id="room-list">
+                <!-- chat.js populates this list from the ROOMS constant,
+                     adding click handlers and an .active class per room. -->
+            </ul>
+
+            <div class="sidebar-footer">
+                <span id="current-user">👤 {{ username }}</span>
+                <a href="{{ url_for('logout') }}" class="logout-link">Log out</a>
+            </div>
+        </aside>
+
+        <!-- =============== MAIN CHAT AREA =============== -->
+        <main class="chat-area">
+            <header class="chat-header">
+                <h3 id="room-title"># general</h3>
+                <p id="room-desc" class="room-desc"></p>
+            </header>
+
+            <!-- Messages appear here. chat.js appends <div> elements. -->
+            <div id="messages" class="messages"></div>
+
+            <div id="typing-indicator" class="typing-indicator"></div>
+
+            <!-- Input row. Submitting triggers the emoji parser + emit. -->
+            <form id="chat-form" class="chat-form" autocomplete="off">
+                <input id="message-input"
+                       placeholder="Type a message… try :smile: or :rocket:"
+                       maxlength="1000"
+                       required>
+                <button type="submit" class="btn-primary">Send</button>
+            </form>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html>

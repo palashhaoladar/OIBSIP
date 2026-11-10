@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oasis Chat — Sign in</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="auth-page">
+    <div class="auth-card">
+        <h1>💬 Oasis Chat</h1>
+        <p class="subtitle">Real-time messaging.</p>
+
+        <!-- Success banner after registration -->
+        {% if just_registered %}
+            <div class="banner success">✅ Account created! Please log in.</div>
+        {% endif %}
+
+        <!-- Error banner (validation failures, wrong password, etc.) -->
+        {% if error %}
+            <div class="banner error">⚠️ {{ error }}</div>
+        {% endif %}
+
+        {% if mode == "register" %}
+        <!-- ==================== REGISTER FORM ==================== -->
+        <form method="POST" action="{{ url_for('register') }}">
+            <label for="username">Username</label>
+            <input id="username" name="username" required minlength="3" maxlength="20">
+
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" required minlength="6">
+
+            <button type="submit" class="btn-primary">Create Account</button>
+        </form>
+        <p class="switch">Already have an account?
+            <a href="{{ url_for('login') }}">Log in</a></p>
+
+        {% else %}
+        <!-- ===================== LOGIN FORM ====================== -->
+        <form method="POST" action="{{ url_for('login') }}">
+            <label for="username">Username</label>
+            <input id="username" name="username" required>
+
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" required>
+
+            <button type="submit" class="btn-primary">Log In</button>
+        </form>
+        <p class="switch">New here?
+            <a href="{{ url_for('register') }}">Create an account</a></p>
+        {% endif %}
+    </div>
+</body>
+</html>

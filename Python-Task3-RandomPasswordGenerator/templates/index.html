@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel — Password Generator & Encrypted Vault</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <h1><span class="logo">⛨</span> Palash</h1>
+        <p class="tagline">Secure generation · AES-256 vault · Argon2id · HIBP k-anonymity</p>
+    </header>
+
+    <main class="grid">
+        <section class="card">
+            <h2>Generator</h2>
+            <div class="mode-toggle">
+                <button id="mode-password" class="mode-btn active">Password</button>
+                <button id="mode-passphrase" class="mode-btn">XKCD Passphrase</button>
+            </div>
+
+            <div id="criteria-password">
+                <div class="row">
+                    <label for="length">Length: <strong id="length-value">16</strong></label>
+                    <input type="range" id="length" min="8" max="128" value="16">
+                </div>
+                <div class="checks">
+                    <label><input type="checkbox" id="upper" checked> Uppercase <code>A-Z</code></label>
+                    <label><input type="checkbox" id="lower" checked> Lowercase <code>a-z</code></label>
+                    <label><input type="checkbox" id="digits" checked> Numbers <code>0-9</code></label>
+                    <label><input type="checkbox" id="symbols" checked> Symbols <code>!@#$</code></label>
+                    <label class="wide"><input type="checkbox" id="exclude_ambiguous"> Exclude ambiguous (<code>l 1 I O 0</code>)</label>
+                </div>
+            </div>
+
+            <div id="criteria-passphrase" class="hidden">
+                <div class="row">
+                    <label for="words">Words: <strong id="words-value">4</strong></label>
+                    <input type="range" id="words" min="4" max="6" value="4">
+                </div>
+                <p class="hint">4–6 random dictionary words, hyphen-separated.</p>
+            </div>
+
+            <div class="output-row">
+                <input type="text" id="password-output" readonly>
+                <button id="copy-btn" class="btn">⧉ Copy</button>
+                <button id="regen-btn" class="btn btn-accent">↻</button>
+            </div>
+
+            <div class="meter-wrap">
+                <div class="meter"><div id="meter-fill"></div></div>
+                <div class="meter-stats">
+                    <span id="entropy-bits">— bits</span>
+                    <span id="crack-online"></span>
+                    <span id="crack-offline"></span>
+                </div>
+            </div>
+
+            <button id="breach-btn" class="btn btn-wide">Check breach status (HIBP k-anonymity)</button>
+            <p id="breach-result" class="hidden"></p>
+        </section>
+
+        <section class="card">
+            <h2>Encrypted Vault <span id="vault-state" class="badge">locked</span></h2>
+            <div id="vault-unlock">
+                <input type="password" id="master" placeholder="Master password" autocomplete="current-password">
+                <button id="unlock-btn" class="btn btn-accent">Unlock</button>
+                <button id="setup-btn" class="btn hidden">Set master password</button>
+                <p id="vault-msg" class="hint"></p>
+            </div>
+            <div id="vault-panel" class="hidden">
+                <div class="entry-form">
+                    <input type="text" id="v-service" placeholder="Service (e.g. github.com)">
+                    <input type="text" id="v-username" placeholder="Username">
+                    <input type="text" id="v-password" placeholder="Password (generate one!)">
+                    <button id="v-save" class="btn btn-accent">Save (AES-256)</button>
+                </div>
+                <ul id="vault-list"></ul>
+                <button id="lock-btn" class="btn btn-wide">🔒 Lock vault</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">Built with Python <code>secrets</code>, Argon2id, AES-256-GCM and the HIBP k-anonymity API.</footer>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
